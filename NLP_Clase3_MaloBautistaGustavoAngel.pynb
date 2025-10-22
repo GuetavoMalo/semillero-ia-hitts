@@ -1,0 +1,986 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/GuetavoMalo/semillero-ia-hitts/blob/main/NLP_Clase3_MaloBautistaGustavoAngel.pynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Malo Bautista Gustavo Angel | 22-Oct-2025 | Gustavoangelmalob@gmail.com**"
+      ],
+      "metadata": {
+        "id": "WhbkAtBIVi6h"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ztevcrmGwerY"
+      },
+      "source": [
+        "# Asignación 1: Regresión Logística\n",
+        "\n",
+        "Bienvenido a la primera semana de esta especialización. Aprenderás sobre regresión logística. Concretamente, implementarás regresión logística para análisis de sentimiento en tweets.  \n",
+        "Dado un tweet, deberás decidir si tiene un sentimiento positivo o negativo.  \n",
+        "Específicamente, aprenderás a:\n",
+        "\n",
+        "* Aprender cómo extraer características para regresión logística a partir de texto\n",
+        "* Implementar regresión logística desde cero\n",
+        "* Aplicar regresión logística en una tarea de procesamiento del lenguaje natural (NLP)\n",
+        "* Probar usando tu modelo de regresión logística\n",
+        "* Realizar análisis de errores\n",
+        "\n",
+        "\n",
+        "¡Comencemos!\n",
+        "\n",
+        "Usaremos un conjunto de datos de tweets.  \n",
+        "Con suerte, obtendrás más del 99% de precisión.  \n",
+        "Ejecuta la celda de abajo para cargar los paquetes.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "V_Nm2dVMwerf"
+      },
+      "source": [
+        "## Tabla de Contenidos\n",
+        "\n",
+        "- [Importar funciones y datos](#0)\n",
+        "- [1 - Regresión Logística](#1)\n",
+        "    - [1.1 - Función Sigmoide](#1-1)\n",
+        "        - [Ejercicio 1 - sigmoid (UNQ_C1)](#ex-1)\n",
+        "    - [1.2 - Función de Costo y Gradiente](#1-2)\n",
+        "        - [Ejercicio 2 - gradientDescent (UNQ_C2)](#ex-2)\n",
+        "- [2 - Extracción de Características](#2)\n",
+        "    - [Ejercicio 3 - extract_features (UNQ_C3)](#ex-3)\n",
+        "- [3 - Entrenando tu Modelo](#3)\n",
+        "- [4 - Prueba tu Regresión Logística](#4)\n",
+        "    - [Ejercicio 4 - predict_tweet (UNQ_C4)](#ex-4)\n",
+        "    - [4.1 - Verifica el Desempeño usando el Conjunto de Prueba](#4-1)\n",
+        "        - [Ejercicio 5 - test_logistic_regression (UNQ_C5)](#ex-5)\n",
+        "- [5 - Análisis de Errores](#5)\n",
+        "- [6 - Predice con tu propio Tweet](#6)\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "blX-rOSHwerg"
+      },
+      "source": [
+        "<a name='0'></a>\n",
+        "## Importar funciones y Data"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 53,
+      "metadata": {
+        "id": "_1lfv8D0werh",
+        "outputId": "ad571039-a4d1-4f8c-a606-f6f50abd4159",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package twitter_samples to /root/nltk_data...\n",
+            "[nltk_data]   Package twitter_samples is already up-to-date!\n",
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Package stopwords is already up-to-date!\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 53
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import nltk\n",
+        "from nltk.corpus import twitter_samples, stopwords\n",
+        "from os import getcwd\n",
+        "\n",
+        "nltk.download('twitter_samples')\n",
+        "nltk.download('stopwords')\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CEz3RqBjwerk"
+      },
+      "source": [
+        "### Funciones Importadas\n",
+        "\n",
+        "Descarga los datos necesarios para esta asignación. Consulta la [documentación del conjunto de datos *twitter_samples*](http://www.nltk.org/howto/twitter.html).\n",
+        "\n",
+        "* **twitter_samples**: si estás ejecutando este notebook en tu computadora local, necesitarás descargarlo usando:\n",
+        "```python\n",
+        "nltk.download('twitter_samples')\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "H4ZCLXM3ITnK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "TFoDk-2awerl"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "LNezvgzzwerl"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "BT7LBq4uwerm"
+      },
+      "source": [
+        "### Preparar los Datos\n",
+        "\n",
+        "* El conjunto `twitter_samples` contiene tres subconjuntos: cinco mil **positive_tweets**, cinco mil **negative_tweets** y el conjunto completo de **10,000 tweets**.  \n",
+        "    * Si utilizáramos los tres conjuntos de datos, se introducirían duplicados de los tweets positivos y negativos.  \n",
+        "    * Por lo tanto, seleccionarás únicamente los cinco mil tweets positivos y los cinco mil tweets negativos.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 54,
+      "metadata": {
+        "id": "g3gFdjZIwerm"
+      },
+      "outputs": [],
+      "source": [
+        "all_positive_tweets = twitter_samples.strings('positive_tweets.json')\n",
+        "all_negative_tweets = twitter_samples.strings('negative_tweets.json')"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "IbLOJAoYwern"
+      },
+      "source": [
+        "* División de entrenamiento y prueba: el 20% formará parte del conjunto de **prueba** y el 80% del conjunto de **entrenamiento**.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 55,
+      "metadata": {
+        "id": "g-zpIIYRwern"
+      },
+      "outputs": [],
+      "source": [
+        "train_pos = all_positive_tweets[:4000]\n",
+        "test_pos = all_positive_tweets[4000:]\n",
+        "train_neg = all_negative_tweets[:4000]\n",
+        "test_neg = all_negative_tweets[4000:]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "DihFx1e_wero"
+      },
+      "source": [
+        "[texto del vínculo](https://)* Crea el arreglo de **numpy** con las etiquetas positivas y negativas.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 56,
+      "metadata": {
+        "id": "OytEveqDwero"
+      },
+      "outputs": [],
+      "source": [
+        "train_x = train_pos + train_neg\n",
+        "test_x = test_pos + test_neg"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 57,
+      "metadata": {
+        "id": "DCClt3qWwerp"
+      },
+      "outputs": [],
+      "source": [
+        "# Etiquetas\n",
+        "train_y = np.append(np.ones((len(train_pos), 1)), np.zeros((len(train_neg), 1)), axis=0)\n",
+        "test_y = np.append(np.ones((len(test_pos), 1)), np.zeros((len(test_neg), 1)), axis=0)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "hqkL-I2bnixL"
+      },
+      "execution_count": 52,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "Dh9FWj69werp"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "EE4YLAZzwerq"
+      },
+      "source": [
+        "### Process Tweet\n",
+        "The given function 'process_tweet' tokenizes the tweet into individual words, removes stop words and applies stemming."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 58,
+      "metadata": {
+        "id": "Jja7_5Zswerr"
+      },
+      "outputs": [],
+      "source": [
+        "from nltk.stem import PorterStemmer\n",
+        "import re, string\n",
+        "\n",
+        "def process_tweet(tweet):\n",
+        "    stemmer = PorterStemmer()\n",
+        "    stopwords_english = stopwords.words('english')\n",
+        "\n",
+        "    tweet = re.sub(r'https?:\\/\\/.*[\\r\\n]*', '', tweet)\n",
+        "    tweet = re.sub(r'@[A-Za-z0-9_]+', '', tweet)\n",
+        "    tweet = re.sub(r'#', '', tweet)\n",
+        "    tweet = tweet.translate(str.maketrans('', '', string.punctuation))\n",
+        "\n",
+        "    words = tweet.split()\n",
+        "    clean_words = [stemmer.stem(word.lower()) for word in words if word.lower() not in stopwords_english]\n",
+        "\n",
+        "    return clean_words\n",
+        "\n",
+        "def build_freqs(tweets, ys):\n",
+        "    from collections import defaultdict\n",
+        "    freqs = defaultdict(int)\n",
+        "    for y, tweet in zip(ys, tweets):\n",
+        "        y = int(np.squeeze(y))\n",
+        "        for word in process_tweet(tweet):\n",
+        "            freqs[(word, y)] += 1\n",
+        "    return freqs\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "rCGTBT_1werr"
+      },
+      "source": [
+        "<a name='1'></a>\n",
+        "## 1 - Regresión Logística\n",
+        "\n",
+        "<a name='1-1'></a>\n",
+        "### 1.1 - Función Sigmoide\n",
+        "\n",
+        "Aprenderás a usar la **regresión logística** para la **clasificación de texto**.  \n",
+        "* La función sigmoide se define como:\n",
+        "\n",
+        "$$ h(z) = \\frac{1}{1+\\exp^{-z}} \\tag{1}$$\n",
+        "\n",
+        "Esta función transforma la entrada `z` en un valor que varía entre **0 y 1**, por lo que puede interpretarse como una **probabilidad**.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "tODlNKKFwers"
+      },
+      "source": [
+        "<a name='ex-1'></a>\n",
+        "### Ejercicio 1 - sigmoid\n",
+        "\n",
+        "Implementa la función **sigmoide**.  \n",
+        "* Querrás que esta función funcione tanto si `z` es un **escalar** como si es un **arreglo (array)**.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CJJy__2bwers"
+      },
+      "source": [
+        "<details>    \n",
+        "<summary>\n",
+        "    <font size=\"3\" color=\"darkgreen\"><b>Hints</b></font>\n",
+        "</summary>\n",
+        "<p>\n",
+        "<ul>\n",
+        "    <li><a href=\"https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html\" > numpy.exp </a> </li>\n",
+        "\n",
+        "</ul>\n",
+        "</p>\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 59,
+      "metadata": {
+        "id": "qYGuyHXGwers"
+      },
+      "outputs": [],
+      "source": [
+        "freqs = build_freqs(train_x, train_y)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 60,
+      "metadata": {
+        "id": "gksoAWp4wers"
+      },
+      "outputs": [],
+      "source": [
+        "def sigmoid(z):\n",
+        "    return 1 / (1 + np.exp(-z))"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "fEcQVyk2wert"
+      },
+      "source": [
+        "#### Regresión Logística: Regresión y Función Sigmoide\n",
+        "\n",
+        "La **regresión logística** toma una regresión lineal común y aplica una **función sigmoide** al resultado de esa regresión lineal.\n",
+        "\n",
+        "**Regresión:**\n",
+        "$$z = \\theta_0 x_0 + \\theta_1 x_1 + \\theta_2 x_2 + ... + \\theta_N x_N$$\n",
+        "\n",
+        "Ten en cuenta que los valores de $\\theta$ son los **pesos**.  \n",
+        "Si tomaste la especialización en *Deep Learning*, allí nos referíamos a los pesos con el vector **w**.  \n",
+        "En este curso, utilizaremos la variable **$\\theta$** para referirnos a los pesos.\n",
+        "\n",
+        "**Regresión Logística:**\n",
+        "$$ h(z) = \\frac{1}{1+\\exp^{-z}} $$\n",
+        "$$ z = \\theta_0 x_0 + \\theta_1 x_1 + \\theta_2 x_2 + ... + \\theta_N x_N $$\n",
+        "\n",
+        "Nos referiremos a **‘z’** como los **logits**.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hcYR0CTRwert"
+      },
+      "source": [
+        "<a name='1-2'></a>\n",
+        "### 1.2 - Función de Costo y Gradiente\n",
+        "\n",
+        "La **función de costo** utilizada para la regresión logística es el promedio de la *pérdida logarítmica* (log loss) a través de todos los ejemplos de entrenamiento:\n",
+        "\n",
+        "$$J(\\theta) = -\\frac{1}{m} \\sum_{i=1}^m \\left[ y^{(i)}\\log (h(z(\\theta)^{(i)})) + (1-y^{(i)})\\log (1-h(z(\\theta)^{(i)})) \\right] \\tag{5} $$\n",
+        "\n",
+        "* **m** es el número de ejemplos de entrenamiento.  \n",
+        "* **y⁽ⁱ⁾** es la etiqueta real del ejemplo de entrenamiento *i*.  \n",
+        "* **h(z⁽ⁱ⁾)** es la predicción del modelo para el ejemplo de entrenamiento *i*.\n",
+        "\n",
+        "La función de pérdida para un solo ejemplo de entrenamiento es:\n",
+        "\n",
+        "$$ Loss = -1 \\times \\left( y^{(i)}\\log (h(z(\\theta)^{(i)})) + (1-y^{(i)})\\log (1-h(z(\\theta)^{(i)})) \\right) $$\n",
+        "\n",
+        "* Todos los valores de **h** están entre 0 y 1, por lo que los logaritmos serán negativos.  \n",
+        "  Esa es la razón por la que se aplica el **factor de -1**, para que la pérdida total sea positiva.  \n",
+        "* Observa que cuando el modelo predice 1 (**h(z(θ)) = 1**) y la etiqueta **y** también es 1, la pérdida para ese ejemplo es 0.  \n",
+        "* De manera similar, cuando el modelo predice 0 (**h(z(θ)) = 0**) y la etiqueta real también es 0, la pérdida es 0.  \n",
+        "* Sin embargo, cuando la predicción del modelo se acerca a 1 (**h(z(θ)) = 0.9999**) y la etiqueta real es 0,  \n",
+        "  el segundo término del logaritmo se vuelve un número negativo grande,  \n",
+        "  que luego se multiplica por -1 para convertirse en una pérdida positiva:  \n",
+        "  $$ -1 \\times (1 - 0) \\times \\log(1 - 0.9999) \\approx 9.2 $$  \n",
+        "  Cuanto más se acerque la predicción del modelo a 1 (cuando debería ser 0), **mayor será la pérdida**.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 61,
+      "metadata": {
+        "id": "Y4krmjbCweru"
+      },
+      "outputs": [],
+      "source": [
+        "def gradientDescent(x, y, theta, alpha, num_iters):\n",
+        "    m = len(x)\n",
+        "    for i in range(num_iters):\n",
+        "        z = np.dot(x, theta)\n",
+        "        h = sigmoid(z)\n",
+        "        J = -1/m * (np.dot(y.T, np.log(h)) + np.dot((1 - y).T, np.log(1 - h)))\n",
+        "        theta = theta - (alpha/m) * np.dot(x.T, (h - y))\n",
+        "    return float(J), theta\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ycbfBtGeweru"
+      },
+      "source": [
+        "* De manera similar, si el modelo predice un valor cercano a 0 ($h(z) = 0.0001$) pero la etiqueta real es 1, el primer término en la función de pérdida se convierte en un número grande:  \n",
+        "  $-1 \\times \\log(0.0001) \\approx 9.2$.  \n",
+        "  Cuanto más se acerque la predicción a cero, **mayor será la pérdida**.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 62,
+      "metadata": {
+        "id": "pCMKjYWyweru"
+      },
+      "outputs": [],
+      "source": [
+        "def extract_features(tweet, freqs, process_tweet=process_tweet):\n",
+        "    word_l = process_tweet(tweet)\n",
+        "    x = np.zeros(3)\n",
+        "    x[0] = 1  # bias\n",
+        "    for word in word_l:\n",
+        "        x[1] += freqs.get((word, 1.0), freqs.get((word, 1), 0))\n",
+        "        x[2] += freqs.get((word, 0.0), freqs.get((word, 0), 0))\n",
+        "    return x.reshape(1, 3)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ZxMiAVjjwerv"
+      },
+      "source": [
+        "#### Actualización de los pesos\n",
+        "\n",
+        "Para actualizar tu vector de pesos $\\theta$, aplicarás **descenso de gradiente (gradient descent)** de manera iterativa para mejorar las predicciones de tu modelo.  \n",
+        "\n",
+        "El gradiente de la función de costo $J$ con respecto a uno de los pesos $\\theta_j$ es:\n",
+        "\n",
+        "$$\\nabla_{\\theta_j}J(\\theta) = \\frac{1}{m} \\sum_{i=1}^m (h^{(i)} - y^{(i)}) x^{(i)}_j \\tag{5}$$\n",
+        "\n",
+        "* 'i' es el índice que recorre los **m** ejemplos de entrenamiento.  \n",
+        "* 'j' es el índice del peso $\\theta_j$, por lo que $x^{(i)}_j$ es la característica asociada a ese peso $\\theta_j$.  \n",
+        "\n",
+        "Para actualizar el peso $\\theta_j$, lo ajustamos restándole una fracción del gradiente determinada por $\\alpha$:\n",
+        "\n",
+        "$$\\theta_j = \\theta_j - \\alpha \\times \\nabla_{\\theta_j}J(\\theta)$$\n",
+        "\n",
+        "* La **tasa de aprendizaje** $\\alpha$ es un valor que elegimos para controlar **qué tan grande será cada actualización**.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "fFpKx4MDwerv"
+      },
+      "source": [
+        "<a name='ex-2'></a>\n",
+        "### Ejercicio 2 - gradientDescent\n",
+        "\n",
+        "Implementa la función **gradient descent** (descenso de gradiente).  \n",
+        "\n",
+        "* El número de iteraciones `num_iters` representa la cantidad de veces que usarás **todo el conjunto de entrenamiento**.  \n",
+        "* En cada iteración, calcularás la función de costo usando todos los ejemplos de entrenamiento (hay `m` ejemplos) y todas las características (features).  \n",
+        "\n",
+        "En lugar de actualizar un solo peso $\\theta_i$ a la vez, podemos actualizar **todos los pesos al mismo tiempo** en el vector columna:  \n",
+        "\n",
+        "$$\\mathbf{\\theta} = \\begin{pmatrix}\n",
+        "\\theta_0\n",
+        "\\\\\n",
+        "\\theta_1\n",
+        "\\\\\n",
+        "\\theta_2\n",
+        "\\\\\n",
+        "\\vdots\n",
+        "\\\\\n",
+        "\\theta_n\n",
+        "\\end{pmatrix}$$\n",
+        "\n",
+        "* $\\mathbf{\\theta}$ tiene dimensiones **(n+1, 1)**, donde *n* es el número de características, y hay un elemento adicional para el **término de sesgo (bias)** $\\theta_0$ (nota que la característica correspondiente $\\mathbf{x_0}$ es 1).  \n",
+        "\n",
+        "* Los **logits** `z` se calculan multiplicando la matriz de características `x` con el vector de pesos `theta`:  \n",
+        "  $$z = \\mathbf{x}\\mathbf{\\theta}$$  \n",
+        "    * $\\mathbf{x}$ tiene dimensiones **(m, n+1)**  \n",
+        "    * $\\mathbf{\\theta}$ tiene dimensiones **(n+1, 1)**  \n",
+        "    * $\\mathbf{z}$ tiene dimensiones **(m, 1)**  \n",
+        "\n",
+        "* La **predicción** `h` se calcula aplicando la función sigmoide a cada elemento de `z`:  \n",
+        "  $$h(z) = sigmoid(z)$$  \n",
+        "  y tiene dimensiones **(m, 1)**.  \n",
+        "\n",
+        "* La **función de costo** $J$ se calcula tomando el producto punto entre los vectores `y` y `log(h)`.  \n",
+        "  Como tanto `y` como `h` son vectores columna de dimensiones **(m, 1)**, se transpone el vector de la izquierda para que la multiplicación matricial se realice correctamente (vector fila × vector columna):  \n",
+        "\n",
+        "  $$J = \\frac{-1}{m} \\times \\left(\\mathbf{y}^T \\cdot \\log(\\mathbf{h}) + \\mathbf{(1-y)}^T \\cdot \\log(\\mathbf{1-h}) \\right)$$  \n",
+        "\n",
+        "* La **actualización de los pesos** $\\theta$ también está vectorizada.  \n",
+        "  Dado que $\\mathbf{x}$ tiene dimensiones **(m, n+1)** y tanto $\\mathbf{h}$ como $\\mathbf{y}$ son **(m, 1)**, debemos transponer $\\mathbf{x}$ para colocarla a la izquierda y poder realizar la multiplicación matricial, obteniendo así el resultado de dimensiones **(n+1, 1)** que necesitamos:\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "SfRY1UjVwerv"
+      },
+      "source": [
+        "<details>    \n",
+        "<summary>\n",
+        "    <font size=\"3\" color=\"darkgreen\"><b>Sugerencias</b></font>\n",
+        "</summary>\n",
+        "<p>\n",
+        "<ul>\n",
+        "    <li>Usa <code>numpy.dot</code> para la multiplicación de matrices.</li>\n",
+        "    <li>Para asegurarte de que la fracción <code>-1/m</code> sea un valor decimal, convierte el numerador o el denominador (o ambos) a tipo <em>float</em>, por ejemplo con <code>float(1)</code> o escribiendo <code>1.</code> para la versión en punto flotante de 1.</li>\n",
+        "</ul>\n",
+        "</p>\n",
+        "</details>\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 63,
+      "metadata": {
+        "id": "t_-0fJH0werw",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "3f6209ae-3227-419a-a53c-2dad589f0cd7"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Cost after training: 0.56690064\n",
+            "Theta: [np.float64(-3.128e-05), np.float64(0.00761474), np.float64(-0.00792277)]\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/tmp/ipython-input-3447470330.py:8: DeprecationWarning: Conversion of an array with ndim > 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)\n",
+            "  return float(J), theta\n"
+          ]
+        }
+      ],
+      "source": [
+        "X = np.array([extract_features(tweet, freqs) for tweet in train_x]).reshape(len(train_x), 3)\n",
+        "Y = train_y.reshape(-1, 1)\n",
+        "theta_init = np.zeros((3, 1))\n",
+        "\n",
+        "# Hiperparámetros ajustados\n",
+        "alpha = 1e-5\n",
+        "num_iters = 5000\n",
+        "\n",
+        "# Entrenar modelo\n",
+        "J, theta = gradientDescent(X, Y, theta_init, alpha, num_iters)\n",
+        "print(f\"Cost after training: {J:.8f}\")\n",
+        "print(f\"Theta: {[round(t, 8) for t in theta.flatten()]}\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 64,
+      "metadata": {
+        "id": "_QHXHEHSwerw"
+      },
+      "outputs": [],
+      "source": [
+        "\n",
+        "def predict_tweet(tweet, freqs, theta):\n",
+        "    x = extract_features(tweet, freqs)\n",
+        "    return float(sigmoid(np.dot(x, theta)).item())"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "sq7Ewlttwerx"
+      },
+      "source": [
+        "<a name='2'></a>\n",
+        "## 2 - Extracción de Características\n",
+        "\n",
+        "* Dada una lista de tweets, extrae las características y guárdalas en una matriz.  \n",
+        "  Extraerás **dos características**:\n",
+        "    * La primera característica es el **número de palabras positivas** en un tweet.  \n",
+        "    * La segunda característica es el **número de palabras negativas** en un tweet.  \n",
+        "* Luego entrenarás tu **clasificador de regresión logística** con estas características.  \n",
+        "* Finalmente, probarás el clasificador en un conjunto de validación.\n",
+        "\n",
+        "<a name='ex-3'></a>\n",
+        "### Ejercicio 3 - extract_features\n",
+        "\n",
+        "Implementa la función **extract_features**.  \n",
+        "* Esta función recibe como entrada un solo tweet.  \n",
+        "* Procesa el tweet usando la función importada `process_tweet` y guarda la lista de palabras resultante.  \n",
+        "* Recorre cada palabra en la lista de palabras procesadas:\n",
+        "    * Para cada palabra, revisa en el diccionario `freqs` el conteo cuando esa palabra está asociada a una etiqueta positiva `1`. (Busca la clave `(word, 1.0)`).  \n",
+        "    * Haz lo mismo para el conteo cuando la palabra está asociada a una etiqueta negativa `0`. (Busca la clave `(word, 0.0)`).  \n",
+        "\n",
+        "**Nota:** En la implementación descrita arriba, la predicción de si un tweet es positivo o negativo depende del **vector de características**, el cual **considera las palabras duplicadas**.  \n",
+        "Esto es diferente de lo mostrado en los videos de las lecciones.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "tTFUdpBqwery"
+      },
+      "source": [
+        "<details>    \n",
+        "<summary>\n",
+        "    <font size=\"3\" color=\"darkgreen\"><b>Sugerencias</b></font>\n",
+        "</summary>\n",
+        "<p>\n",
+        "<ul>\n",
+        "    <li>Asegúrate de manejar los casos en los que la clave <code>(word, label)</code> no se encuentre en el diccionario.</li>\n",
+        "    <li>Busca en la web sugerencias sobre cómo usar la función <code>get</code> de un diccionario en Python.  \n",
+        "    Aquí tienes un <a href=\"https://www.programiz.com/python-programming/methods/dictionary/get\">ejemplo</a>.</li>\n",
+        "</ul>\n",
+        "</p>\n",
+        "</details>\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 65,
+      "metadata": {
+        "id": "pr2OdKGawerz",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "eabce0e7-e1f6-4323-9298-8de8046c12e5"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy on test set: 72.15%\n"
+          ]
+        }
+      ],
+      "source": [
+        "test_acc = 0\n",
+        "for tweet, y_true in zip(test_x, test_y):\n",
+        "    y_hat = predict_tweet(tweet, freqs, theta)\n",
+        "    y_pred = 1 if y_hat > 0.5 else 0\n",
+        "    if y_pred == y_true:\n",
+        "        test_acc += 1\n",
+        "test_acc /= len(test_x)\n",
+        "print(f\"Accuracy on test set: {test_acc*100:.2f}%\")\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 66,
+      "metadata": {
+        "id": "7Tq92ET8werz",
+        "outputId": "f15b2d16-1b6b-48b8-94ff-9dc2ce50ce08",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Tweet: 'I am learning :)' -> Predicted probability: 0.5055, Sentiment: Positivo 😀\n"
+          ]
+        }
+      ],
+      "source": [
+        "my_tweet = 'I am learning :)'\n",
+        "y_hat = predict_tweet(my_tweet, freqs, theta)\n",
+        "sentiment = \"Positivo 😀\" if y_hat > 0.5 else \"Negativo 😞\"\n",
+        "print(f\"Tweet: '{my_tweet}' -> Predicted probability: {y_hat:.4f}, Sentiment: {sentiment}\")"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "56w2SONower0"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Tsdnt-62wer2"
+      },
+      "source": [
+        "<a name='3'></a>\n",
+        "## 3 - Entrenamiento de tu Modelo\n",
+        "\n",
+        "Para entrenar el modelo:\n",
+        "* Apila (*stack*) las características de todos los ejemplos de entrenamiento en una matriz **X**.  \n",
+        "* Llama a la función `gradientDescent`, que implementaste anteriormente.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "bSn5-okQwer2"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "X0UpE4Qxwer3"
+      },
+      "source": [
+        "<a name='4'></a>\n",
+        "## 4 - Prueba tu Regresión Logística\n",
+        "\n",
+        "Ha llegado el momento de probar tu función de **regresión logística** con nuevas entradas que tu modelo **no ha visto antes**.\n",
+        "\n",
+        "<a name='ex-4'></a>\n",
+        "### Ejercicio 4 - predict_tweet\n",
+        "\n",
+        "Implementa la función `predict_tweet`.  \n",
+        "Esta función debe **predecir si un tweet es positivo o negativo**.\n",
+        "\n",
+        "* Dado un tweet, primero procésalo y luego extrae sus características.  \n",
+        "* Aplica los pesos aprendidos del modelo sobre esas características para obtener los **logits**.  \n",
+        "* Aplica la función **sigmoide** a los logits para obtener la **predicción** (un valor entre 0 y 1).  \n",
+        "\n",
+        "$$y_{pred} = sigmoid(\\mathbf{x} \\cdot \\theta)$$\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "SsFYLykPwer3"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "-jnTtChmwer3"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "5yhccjXwwer4"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "TRPee4DOwer5"
+      },
+      "source": [
+        "<a name='4-1'></a>\n",
+        "### 4.1 - Verificar el Desempeño usando el Conjunto de Prueba\n",
+        "\n",
+        "Después de entrenar tu modelo usando el conjunto de entrenamiento anterior, verifica cómo podría comportarse tu modelo con **datos reales no vistos**, probándolo con el **conjunto de prueba**.\n",
+        "\n",
+        "<a name='ex-5'></a>\n",
+        "### Ejercicio 5 - test_logistic_regression\n",
+        "\n",
+        "Implementa la función `test_logistic_regression`.  \n",
+        "* Dado el conjunto de datos de prueba y los pesos de tu modelo entrenado, calcula la **precisión (accuracy)** de tu modelo de regresión logística.  \n",
+        "* Usa tu función `predict_tweet` para hacer predicciones sobre cada tweet en el conjunto de prueba.  \n",
+        "* Si la predicción es **mayor que 0.5**, asigna la clasificación del modelo `y_hat` como 1; de lo contrario, asigna `y_hat` como 0.  \n",
+        "* Una predicción es **acertada** cuando `y_hat` es igual a `test_y`.  \n",
+        "  Suma todas las instancias en las que son iguales y **divide entre m** para obtener la precisión final.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "cpv7XVMDwer5"
+      },
+      "source": [
+        "<details>    \n",
+        "<summary>\n",
+        "    <font size=\"3\" color=\"darkgreen\"><b>Hints</b></font>\n",
+        "</summary>\n",
+        "<p>\n",
+        "<ul>\n",
+        "    <li>Use np.asarray() to convert a list to a numpy array</li>\n",
+        "    <li>Use numpy.squeeze() to make an (m,1) dimensional array into an (m,) array </li>\n",
+        "</ul>\n",
+        "</p>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "TkqUUv8vwer6"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "Vrv4i-XSwer6"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "j28Fi-Mywer7"
+      },
+      "source": [
+        "<a name='5'></a>\n",
+        "## 5 - Análisis de Errores\n",
+        "\n",
+        "En esta parte verás algunos tweets que tu modelo clasificó de forma incorrecta.  \n",
+        "¿Por qué crees que ocurrieron estas clasificaciones erróneas?  \n",
+        "En específico, ¿qué tipo de tweets tiende a clasificar mal tu modelo?\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "4FgHo9wywer8"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "NdrS4A_Rwer8"
+      },
+      "source": [
+        "Later in this specialization, we will see how we can use deeplearning to improve the prediction performance."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "azXdWhqQwer8"
+      },
+      "source": [
+        "<a name='6'></a>\n",
+        "## 6 - Predict with your own Tweet"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "VJB32n9nwer9"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "fy5nQm-Iwer9"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 52,
+      "metadata": {
+        "id": "RvLZkF19wer9"
+      },
+      "outputs": [],
+      "source": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.7.6"
+    },
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
